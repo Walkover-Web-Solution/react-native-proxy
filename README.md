@@ -8,17 +8,19 @@ react-native-proxy
 npm install react-native-proxy
 ```
 
+FOR ANDROID ONLY
+refer to this doc for setting up google dependencies
+https://react-native-google-signin.github.io/docs/setting-up/android
+
 ## Usage
 
+import ShowGoogleLoginButton from 'react-native-proxy'
 
-```js
-import { multiply } from 'react-native-proxy';
-
-// ...
-
-const result = await multiply(3, 7);
-```
-
+<ShowGoogleLoginButton
+    referenceId=<YOUR REF ID>
+    onLoginSuccess={handleLoginSuccess}
+    onLoginFailure={handleLoginFailure}
+/>
 
 ## Contributing
 
