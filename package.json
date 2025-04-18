@@ -1,6 +1,6 @@
 {
   "name": "react-native-proxy",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "react-native-proxy",
   "source": "./src/index.tsx",
   "main": "./lib/commonjs/index.js",
