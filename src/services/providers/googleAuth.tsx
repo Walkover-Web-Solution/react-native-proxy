@@ -7,8 +7,8 @@ import {
  * Configure Google Sign-In
  * @param {object} config - Google Sign-In configuration
  */
-export const configureGoogleSignIn = () => {
-    GoogleSignin.configure();
+export const configureGoogleSignIn = (config:any) => {
+    GoogleSignin.configure(config);
 };
 
 /**
@@ -19,7 +19,6 @@ export const configureGoogleSignIn = () => {
 export const googleLogin = async () => {
     try {
         await GoogleSignin.hasPlayServices();
-
         // This will prompt for consent and return auth code
         const signInResponse: SignInResponse = await GoogleSignin.signIn();
         const { data } = signInResponse;
