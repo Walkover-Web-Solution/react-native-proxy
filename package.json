@@ -1,6 +1,6 @@
 {
   "name": "react-native-proxy",
-  "version": "0.1.1",
+  "version": "0.1.4",
   "description": "react-native-proxy",
   "source": "./src/index.tsx",
   "main": "./lib/commonjs/index.js",
@@ -166,6 +166,7 @@
     "@react-native-async-storage/async-storage": "^2.1.2",
     "@react-native-google-signin/google-signin": "^13.2.0",
     "axios": "^1.8.4",
-    "crypto": "^1.0.1"
+    "buffer": "^6.0.3",
+    "react-native-quick-crypto": "^0.7.13"
   }
 }
