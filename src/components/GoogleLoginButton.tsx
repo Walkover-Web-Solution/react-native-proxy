@@ -39,13 +39,9 @@ const GoogleLoginButton = ({
         if (loading || disabled) return;
         try {
             const listOfFeatures = await FeatureApis.getFeatureList(referenceId)
-            const googleFeature = listOfFeatures.find((feature: any) => feature.text === 'Continue with Google');
-            const webClientId = googleFeature?.urlLink?.split('client_id=')[1]?.split('&')[0];
-            configureGoogleSignIn({
-                webClientId: webClientId,
-                offlineAccess: true,
-                forceCodeForRefreshToken: true,
-            });
+console.log('456789',listOfFeatures);
+
+            configureGoogleSignIn();
             setLoading(true);
             const result = await login('google');
             setDataToShow(result)

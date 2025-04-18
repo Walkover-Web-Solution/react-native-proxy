@@ -7,12 +7,8 @@ import {
  * Configure Google Sign-In
  * @param {object} config - Google Sign-In configuration
  */
-export const configureGoogleSignIn = (config: any) => {
-    GoogleSignin.configure({
-        ...config,
-        offlineAccess: true, // Required to get auth code
-        forceCodeForRefreshToken: true, // Ensures we get fresh auth code
-    });
+export const configureGoogleSignIn = () => {
+    GoogleSignin.configure();
 };
 
 /**
