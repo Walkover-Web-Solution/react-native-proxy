@@ -9,12 +9,12 @@ import {
 } from 'react-native';
 import { configureGoogleSignIn } from '../services/providers/googleAuth';
 import { login } from '../services/authService';
-// import { FeatureApis } from '../apis/featureApis';
+import { FeatureApis } from '../apis/featureApis';
 
 const GOOGLE_LOGO = 'https://developers.google.com/identity/images/g-logo.png';
 
 const GoogleLoginButton = ({
-    // referenceId,
+    referenceId,
     onLoginSuccess,
     onLoginFailure,
     buttonText = 'Sign in with Google',
@@ -22,7 +22,6 @@ const GoogleLoginButton = ({
     textStyle,
     loadingColor = '#4285F4',
     disabled = false,
-    config = null
 }: {
     referenceId: string,
     onLoginSuccess: (result: any) => void;
@@ -32,7 +31,6 @@ const GoogleLoginButton = ({
     textStyle?: object;
     loadingColor?: string;
     disabled?: boolean;
-    config?: any
 }) => {
     const [loading, setLoading] = React.useState(false);
     const [dataToShow, setDataToShow] = React.useState<string>("NO DATA");
@@ -40,8 +38,11 @@ const GoogleLoginButton = ({
     const handleLogin = async () => {
         if (loading || disabled) return;
         try {
-            // const listOfFeatures = await FeatureApis.getFeatureList(referenceId)
-            configureGoogleSignIn(config);
+            const listOfFeatures = await FeatureApis.getFeatureList(referenceId)
+            setDataToShow(JSON.stringify(listOfFeatures));
+            const googleFeature = listOfFeatures.find((feature: any) => feature.text === 'Continue with Google');
+            const webClientId = googleFeature?.urlLink?.split('client_id=')[1]?.split('&')[0];
+            configureGoogleSignIn({ webClientId, offlineAccess: true });
             setLoading(true);
             const result = await login('google');
             setDataToShow(result)
