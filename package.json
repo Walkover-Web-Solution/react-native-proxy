@@ -89,7 +89,11 @@
   },
   "peerDependencies": {
     "react": "*",
-    "react-native": "*"
+    "react-native": "*",
+    "@react-native-async-storage/async-storage": "^2.1.2",
+    "@react-native-google-signin/google-signin": "^13.2.0",
+    "react-native-quick-crypto": "^0.7.13",
+    "buffer": "^6.0.3"
   },
   "workspaces": [
     "example"
@@ -168,12 +172,5 @@
     "axios": "^1.8.4",
     "buffer": "^6.0.3",
     "react-native-quick-crypto": "^0.7.13"
-  },
-  "bundledDependencies": [
-    "@react-native-async-storage/async-storage",
-    "@react-native-google-signin/google-signin",
-    "axios",
-    "buffer",
-    "react-native-quick-crypto"
-  ]
+  }
 }
