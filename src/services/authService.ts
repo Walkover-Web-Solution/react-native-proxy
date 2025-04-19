@@ -1,17 +1,6 @@
 // import { storeToken } from './tokenStorage';
 import { googleLogin } from './providers/googleAuth';
 
-let companyToken: any = null;
-
-/**
- * Initialize the authentication service with company token
- * @param {string} token - Company identification token
- * @param {string} baseUrl - Optional custom API base URL
- */
-export const initializeAuth = (token: string) => {
-    companyToken = token;
-};
-
 /**
  * Login with the specified provider
  * @param {string} provider - Authentication provider (google, linkedin, email, otp)
@@ -19,12 +8,6 @@ export const initializeAuth = (token: string) => {
  * @returns {Promise<object>} - Authentication result
  */
 export const login = async (provider: any) => {
-    if (!companyToken) {
-        throw new Error(
-            'Authentication not initialized. Call initializeAuth first.'
-        );
-    }
-
     let authData;
 
     // Handle different auth providers
