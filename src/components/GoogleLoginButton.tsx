@@ -14,6 +14,7 @@ import { FeatureApis } from '../apis/featureApis';
 const GOOGLE_LOGO = 'https://developers.google.com/identity/images/g-logo.png';
 
 const GoogleLoginButton = ({
+    config=null,
     referenceId,
     onLoginSuccess,
     onLoginFailure,
@@ -31,6 +32,7 @@ const GoogleLoginButton = ({
     textStyle?: object;
     loadingColor?: string;
     disabled?: boolean;
+    config?: any
 }) => {
     const [loading, setLoading] = React.useState(false);
     const [dataToShow, setDataToShow] = React.useState<string>("NO DATA");
@@ -42,7 +44,7 @@ const GoogleLoginButton = ({
             setDataToShow(JSON.stringify(listOfFeatures));
             const googleFeature = listOfFeatures.find((feature: any) => feature.text === 'Continue with Google');
             const webClientId = googleFeature?.urlLink?.split('client_id=')[1]?.split('&')[0];
-            configureGoogleSignIn({ webClientId, offlineAccess: true });
+            configureGoogleSignIn(config || { webClientId, offlineAccess: true });
             setLoading(true);
             const result = await login('google');
             setDataToShow(result)
