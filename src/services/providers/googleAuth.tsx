@@ -7,7 +7,7 @@ import {
  * Configure Google Sign-In
  * @param {object} config - Google Sign-In configuration
  */
-export const configureGoogleSignIn = (config:any) => {
+export const configureGoogleSignIn = (config: any) => {
     GoogleSignin.configure(config);
 };
 
@@ -26,6 +26,7 @@ export const googleLogin = async () => {
         if (!data?.serverAuthCode) {
             throw new Error('Failed to obtain authorization code from Google');
         }
+        console.log("data recieved from google", data);
 
         return {
             authCode: data?.serverAuthCode,
