@@ -22,16 +22,8 @@ export const googleLogin = async () => {
         // This will prompt for consent and return auth code
         const signInResponse: SignInResponse = await GoogleSignin.signIn();
         const { data } = signInResponse;
-
-        if (!data?.serverAuthCode) {
-            throw new Error('Failed to obtain authorization code from Google');
-        }
         console.log("data recieved from google", data);
-
-        return {
-            authCode: data?.serverAuthCode,
-            user: data.user,
-        };
+        return data
     } catch (error: any) {
         console.error('Google Sign In Error:', error);
         throw new Error('Google authentication failed: ' + error.message);

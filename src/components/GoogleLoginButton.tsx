@@ -14,7 +14,7 @@ import { FeatureApis } from '../apis/featureApis';
 const GOOGLE_LOGO = 'https://developers.google.com/identity/images/g-logo.png';
 
 const GoogleLoginButton = ({
-    config=null,
+    config = null,
     referenceId,
     onLoginSuccess,
     onLoginFailure,
@@ -35,24 +35,21 @@ const GoogleLoginButton = ({
     config?: any
 }) => {
     const [loading, setLoading] = React.useState(false);
-    const [dataToShow, setDataToShow] = React.useState<string>("NO DATA");
 
     const handleLogin = async () => {
         if (loading || disabled) return;
         try {
             const listOfFeatures = await FeatureApis.getFeatureList(referenceId)
-            setDataToShow(JSON.stringify(listOfFeatures));
             const googleFeature = listOfFeatures.find((feature: any) => feature.text === 'Continue with Google');
             const webClientId = googleFeature?.urlLink?.split('client_id=')[1]?.split('&')[0];
             configureGoogleSignIn(config || { webClientId, offlineAccess: true });
             setLoading(true);
-            const result = await login('google');
-            setDataToShow(result)
-            onLoginSuccess && onLoginSuccess(result);
+            const googleLoginResult: any = await login('google');
+            const proxyResponse = await FeatureApis.getProxyAuthToken(googleFeature.state, googleLoginResult.idToken)
+            onLoginSuccess && onLoginSuccess(proxyResponse);
         } catch (error: any) {
             console.error('Google login failed:', error);
             onLoginFailure && onLoginFailure(error);
-            setDataToShow(`Error in login with error - ${error.message}`)
         } finally {
             setLoading(false);
         }
@@ -72,7 +69,6 @@ const GoogleLoginButton = ({
                     <Text style={[styles.text, textStyle]}>{buttonText}</Text>
                 </View>
             )}
-            {dataToShow}
         </TouchableOpacity>
     );
 };

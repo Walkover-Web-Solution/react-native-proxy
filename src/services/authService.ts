@@ -18,9 +18,7 @@ export const login = async (provider: any) => {
         default:
             throw new Error(`Unsupported authentication provider: ${provider}`);
     }
-
-    // Exchange auth code for company auth token
-    return JSON.stringify(authData)
+    return authData
 
     // if (!response.ok) {
     //     const error = await response.json();
