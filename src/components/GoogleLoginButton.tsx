@@ -45,8 +45,8 @@ const GoogleLoginButton = ({
             configureGoogleSignIn(config || { webClientId, offlineAccess: true });
             setLoading(true);
             const googleLoginResult: any = await login('google');
-            const proxyResponse = await FeatureApis.getProxyAuthToken(googleFeature.state, googleLoginResult.idToken)
-            onLoginSuccess && onLoginSuccess(proxyResponse);
+            // const proxyResponse = await FeatureApis.getProxyAuthToken(googleFeature.state, googleLoginResult.idToken)
+            onLoginSuccess && onLoginSuccess(googleLoginResult);
         } catch (error: any) {
             console.error('Google login failed:', error);
             onLoginFailure && onLoginFailure(error);
