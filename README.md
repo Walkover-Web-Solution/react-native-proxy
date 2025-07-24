@@ -42,6 +42,35 @@ Important:
 2. Map correct package name to GCP console
 
 
+FOR IOS ONLY
+To use this on iOS, you must manually configure the following:
+
+1. for Sign-In with Apple
+
+Ensure you have the following setup on proxy dashboard under apple authentication feature:
+- App ID
+- Client ID
+- Key ID
+- .p8 private key file from Apple Developer → Keys section
+
+These are required for handling Google Sign-In via Apple.
+
+2. Sign-In via Google
+- Configure URL Scheme
+- Open your Info.plist and add:
+
+<key>CFBundleURLTypes</key>
+<array>
+  <dict>
+    <key>CFBundleURLSchemes</key>
+    <array>
+      <string>com.googleusercontent.apps.YOUR_CLIENT_ID</string>
+    </array>
+  </dict>
+</array>
+
+Replace YOUR_CLIENT_ID with the one from your GCP console (without .apps.googleusercontent.com suffix).
+
 ## Contributing
 
 See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.

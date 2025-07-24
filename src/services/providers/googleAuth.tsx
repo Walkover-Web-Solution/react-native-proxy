@@ -1,6 +1,5 @@
 import {
-    GoogleSignin,
-    type SignInResponse,
+    GoogleSignin
 } from '@react-native-google-signin/google-signin';
 
 /**
@@ -20,10 +19,9 @@ export const googleLogin = async () => {
     try {
         await GoogleSignin.hasPlayServices();
         // This will prompt for consent and return auth code
-        const signInResponse: SignInResponse = await GoogleSignin.signIn();
-        const { data } = signInResponse;
-        console.log("data recieved from google", data);
-        return data
+        await GoogleSignin.signIn();
+        const tokens = await GoogleSignin.getTokens();
+        return tokens
     } catch (error: any) {
         console.error('Google Sign In Error:', error);
         throw new Error('Google authentication failed: ' + error.message);
