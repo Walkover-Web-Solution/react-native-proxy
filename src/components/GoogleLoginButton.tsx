@@ -1,29 +1,11 @@
-import React from 'react';
-import {
-    TouchableOpacity,
-    Text,
-    StyleSheet,
-    Image,
-    View,
-    ActivityIndicator,
-} from 'react-native';
+import React from 'react'
+import { ActivityIndicator, Image, TouchableOpacity, View, Text, StyleSheet, Platform } from 'react-native'
+import { FeatureApis } from '../apis/featureApis';
 import { configureGoogleSignIn } from '../services/providers/googleAuth';
 import { login } from '../services/authService';
-import { FeatureApis } from '../apis/featureApis';
+import type { GoogleFeatureType } from '../types/features';
 
-const GOOGLE_LOGO = 'https://developers.google.com/identity/images/g-logo.png';
-
-const GoogleLoginButton = ({
-    config = null,
-    referenceId,
-    onLoginSuccess,
-    onLoginFailure,
-    buttonText = 'Sign in with Google',
-    buttonStyle,
-    textStyle,
-    loadingColor = '#4285F4',
-    disabled = false,
-}: {
+interface PropsType {
     referenceId: string,
     onLoginSuccess: (result: any) => void;
     onLoginFailure: (error: any) => void;
@@ -32,21 +14,28 @@ const GoogleLoginButton = ({
     textStyle?: object;
     loadingColor?: string;
     disabled?: boolean;
-    config?: any
-}) => {
-    const [loading, setLoading] = React.useState(false);
+    config?: any;
+    loading: boolean;
+    setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+    feature: GoogleFeatureType
+}
 
+const GOOGLE_LOGO = 'https://developers.google.com/identity/images/g-logo.png';
+
+export default function GoogleLoginButton(props: PropsType) {
+    const { loading, disabled, feature, setLoading, onLoginSuccess, onLoginFailure, buttonStyle, loadingColor, textStyle, buttonText } = props
     const handleLogin = async () => {
         if (loading || disabled) return;
         try {
-            const listOfFeatures = await FeatureApis.getFeatureList(referenceId)
-            const googleFeature = listOfFeatures.find((feature: any) => feature.text === 'Continue with Google');
-            const webClientId = googleFeature?.urlLink?.split('client_id=')[1]?.split('&')[0];
-            configureGoogleSignIn(config || { webClientId, offlineAccess: true });
+            const webClientId = feature?.urlLink?.split('client_id=')[1]?.split('&')[0];
+            const state = feature?.urlLink?.split('state=')[1]?.split('&')[0] || '';
+            const iosClientId = feature?.ios_client_id
+            const googleConfig = Platform.OS === 'ios' ? { iosClientId } : { webClientId, offlineAccess: true }
+            configureGoogleSignIn(googleConfig);
             setLoading(true);
             const googleLoginResult: any = await login('google');
-            // const proxyResponse = await FeatureApis.getProxyAuthToken(googleFeature.state, googleLoginResult.idToken)
-            onLoginSuccess && onLoginSuccess(googleLoginResult);
+            const proxyResponse = await FeatureApis.getProxyAuthTokenForGoogleAuth(state, googleLoginResult.accessToken)
+            onLoginSuccess && onLoginSuccess(proxyResponse);
         } catch (error: any) {
             console.error('Google login failed:', error);
             onLoginFailure && onLoginFailure(error);
@@ -54,24 +43,23 @@ const GoogleLoginButton = ({
             setLoading(false);
         }
     };
+    return <TouchableOpacity
+        style={[styles.button, buttonStyle, disabled && styles.disabled]}
+        onPress={handleLogin}
+        disabled={disabled || loading}
+    >
+        {loading ? (
+            <ActivityIndicator color={loadingColor} />
+        ) : (
+            <View style={styles.buttonContent}>
+                <Image source={{ uri: GOOGLE_LOGO }} style={styles.logo} />
+                <Text style={[styles.text, textStyle]}>{buttonText}</Text>
+            </View>
 
-    return (
-        <TouchableOpacity
-            style={[styles.button, buttonStyle, disabled && styles.disabled]}
-            onPress={handleLogin}
-            disabled={disabled || loading}
-        >
-            {loading ? (
-                <ActivityIndicator color={loadingColor} />
-            ) : (
-                <View style={styles.buttonContent}>
-                    <Image source={{ uri: GOOGLE_LOGO }} style={styles.logo} />
-                    <Text style={[styles.text, textStyle]}>{buttonText}</Text>
-                </View>
-            )}
-        </TouchableOpacity>
-    );
-};
+        )}
+    </TouchableOpacity>
+}
+
 
 const styles = StyleSheet.create({
     button: {
@@ -106,5 +94,3 @@ const styles = StyleSheet.create({
         fontWeight: '600',
     },
 });
-
-export default GoogleLoginButton;

@@ -1,9 +1,9 @@
-import GoogleLoginButton from "./components/GoogleLoginButton";
+import ProxyAuth from "./components/ProxyAuthMethods";
 
 export function multiply(a: number, b: number): number {
   return a * b;
 }
-export function ShowGoogleLoginButton(props: {
+export function ShowProxyAuth(props: {
   referenceId: string,
   onLoginSuccess: (result: any) => void;
   onLoginFailure: (error: any) => void;
@@ -13,5 +13,5 @@ export function ShowGoogleLoginButton(props: {
   loadingColor?: string;
   disabled?: boolean;
 }) {
-  return <GoogleLoginButton {...props} />
+  return <ProxyAuth {...props} />
 }
