@@ -1,7 +1,8 @@
 {
-  "name": "react-native-proxy",
-  "version": "0.1.17",
-  "description": "react-native-proxy",
+  "name": "@msg91comm/react-native-36blocks-proxy",
+  "version": "1.0.1",
+  "private": false,
+  "description": "Proxy package by MSG91",
   "source": "./src/index.tsx",
   "main": "./lib/commonjs/index.js",
   "module": "./lib/module/index.js",
@@ -53,16 +54,16 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SiDDhartharG/react-native-proxy.git"
+    "url": "git+https://github.com/Walkover-Web-Solution/react-native-proxy.git"
   },
-  "author": "garg.sid6665@gmail.com <garg.sid6665@gmail.com> (https://github.com/SiDDhartharG)",
+  "author": "Walkover",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/SiDDhartharG/react-native-proxy/issues"
+    "url": "https://github.com/Walkover-Web-Solution/react-native-proxy/issues"
   },
-  "homepage": "https://github.com/SiDDhartharG/react-native-proxy#readme",
+  "homepage": "https://github.com/Walkover-Web-Solution/react-native-proxy#readme",
   "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
+    "access": "public"
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^19.6.0",
@@ -174,12 +175,5 @@
     "axios": "^1.8.4",
     "buffer": "^6.0.3",
     "react-native-quick-crypto": "^0.7.13"
-  },
-  "contributors": [
-    {
-      "name": "Rudraksh Kachhawa",
-      "email": "rudrakshkachhawa@gmail.com",
-      "url": "https://github.com/rudrakachhawa"
-    }
-  ]
+  }
 }
