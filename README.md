@@ -18,13 +18,11 @@ step 1: Install dependencies
 npm install react-native-proxy
 npm install @react-native-async-storage/async-storage
 npm install @react-native-google-signin/google-signin
-npm install react-native-quick-crypto
-npm install buffer
 
 step 2: Code (Show google login/signin button)
-import ShowGoogleLoginButton from 'react-native-proxy'
+import {ShowProxyAuth} from 'react-native-proxy'
 
-<ShowGoogleLoginButton
+<ShowProxyAuth
     referenceId=<YOUR REF ID>
     onLoginSuccess={handleLoginSuccess}
     onLoginFailure={handleLoginFailure}
