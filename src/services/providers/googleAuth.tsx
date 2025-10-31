@@ -23,7 +23,7 @@ export const googleLogin = async () => {
         // This will prompt for consent and return auth code
         await GoogleSignin.signIn();
         const tokens = await GoogleSignin.getTokens();
-        console.log("tokendddd------>", tokens);
+       
         
         return tokens
     } catch (error: any) {
