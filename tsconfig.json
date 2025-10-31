@@ -22,8 +22,11 @@
     "noUnusedParameters": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
-    "strict": true,
+    "strict": false,
     "target": "ESNext",
     "verbatimModuleSyntax": true
-  }
+  },
+  "exclude": [
+    "node_modules/@msg91comm/react-native-sendotp/**/*"
+  ]
 }

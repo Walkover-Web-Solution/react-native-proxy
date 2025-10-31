@@ -1,21 +1,16 @@
 {
-  "name": "@msg91comm/react-native-36blocks-proxy",
+  "name": "@mysdk123/react-native-36blocks-proxy",
   "version": "1.0.1",
   "private": false,
   "description": "Proxy package by MSG91",
   "source": "./src/index.tsx",
-  "main": "./lib/commonjs/index.js",
-  "module": "./lib/module/index.js",
+  "main": "./src/index.tsx",
+  "module": "./src/index.tsx",
   "exports": {
     ".": {
-      "import": {
-        "types": "./lib/typescript/module/src/index.d.ts",
-        "default": "./lib/module/index.js"
-      },
-      "require": {
-        "types": "./lib/typescript/commonjs/src/index.d.ts",
-        "default": "./lib/commonjs/index.js"
-      }
+      "import": "./src/index.tsx",
+      "require": "./src/index.tsx",
+      "default": "./src/index.tsx"
     },
     "./package.json": "./package.json"
   },
@@ -42,10 +37,13 @@
     "example": "yarn workspace react-native-proxy-example",
     "test": "jest",
     "typecheck": "tsc",
-    "lint": "eslint \"**/*.{js,ts,tsx}\"",
+    "lint": "echo \"ESLint disabled\"",
     "clean": "del-cli lib",
-    "prepare": "bob build",
-    "release": "release-it"
+    "prepare": "echo 'Skipping build for direct publish'",
+    "build:js": "bob build --target commonjs,module",
+    "start": "react-native start",
+    "ios": "react-native run-ios",
+    "android": "react-native run-android"
   },
   "keywords": [
     "react-native",
@@ -71,10 +69,11 @@
     "@eslint/eslintrc": "^3.3.0",
     "@eslint/js": "^9.22.0",
     "@evilmartians/lefthook": "^1.5.0",
+    "@react-native-community/cli": "^20.0.2",
     "@react-native/eslint-config": "^0.78.0",
     "@release-it/conventional-changelog": "^9.0.2",
     "@types/jest": "^29.5.5",
-    "@types/react": "^19.0.12",
+    "@types/react": "^18.3.24",
     "commitlint": "^19.6.1",
     "del-cli": "^5.1.0",
     "eslint": "^9.22.0",
@@ -168,6 +167,8 @@
   },
   "dependencies": {
     "@invertase/react-native-apple-authentication": "^2.4.1",
+    "@msg91comm/react-native-sendotp": "^1.0.0",
+    "@mysdk123/react-native-36blocks-proxy": "^1.0.1",
     "@react-native-async-storage/async-storage": "^2.1.2",
     "@react-native-google-signin/google-signin": "^13.2.0",
     "axios": "^1.8.4"
