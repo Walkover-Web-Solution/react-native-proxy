@@ -3,13 +3,11 @@ type AllFeaturesType = (featureType | GoogleFeatureType)[]
 interface featureType {
     id: string,
     urlLink: string,
-    text: string,
-    state?: string
+    text: string
 }
 
 interface GoogleFeatureType extends featureType {
-    ios_client_id?: string,
-    client_id?: string
+    ios_client_id?: string
 }
 
 interface OTPFeatureType extends featureType {

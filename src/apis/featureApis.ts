@@ -56,8 +56,8 @@ export class FeatureApis {
             )
             console.log(data,'data in google')
             return data.data
-        } catch (e: any)   {
-            console.log(e?.message || e,'error in google')
+        } catch (e)   {
+            console.log(e.message,'error in google')
             throw e
         }
     }

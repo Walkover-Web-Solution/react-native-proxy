@@ -49,7 +49,7 @@ const AppleLoginButton = ({
 
         const { identityToken, authorizationCode } = appleAuthRequestResponse;
         const state = feature?.state ?? (feature?.urlLink?.split('state=')[1]?.split('&')[0] || '');
-        console.log("state=========",state);
+        console.log("state==",state);
         
         if (!identityToken) {
           throw new Error('Apple Sign-In failed - no identity token returned.');

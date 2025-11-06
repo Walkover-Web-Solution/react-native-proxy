@@ -67,7 +67,7 @@ export default function GoogleLoginButton(props: PropsType) {
                 
                 const googleConfig = Platform.OS === 'ios' 
                     ? { iosClientId } 
-                    : { webClientId };
+                    : { webClientId, offlineAccess: true };
                 
                 console.log('⚙️ Google Config:', googleConfig);
                 configureGoogleSignIn(googleConfig);
@@ -125,7 +125,7 @@ export default function GoogleLoginButton(props: PropsType) {
             let errorMessage = 'Google Sign-In failed. Please try again.';
             
             if (error.message?.includes('DEVELOPER_ERROR')) {
-                errorMessage = 'Google Sign-In configuration error. Please contact support.';
+                errorMessage = 'Google Sign-In configuration error. Please check SHA1 fingerprint in Google Cloud Console.';
             } else if (error.message?.includes('SIGN_IN_CANCELLED')) {
                 errorMessage = 'Sign-in was cancelled.';
             } else if (error.message?.includes('NETWORK_ERROR')) {

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Modal, StyleSheet, Text, TouchableOpacity, View, ActivityIndicator, Alert, Image } from 'react-native';
-import OTPVerification from '@msg91comm/react-native-sendotp';
+import { OTPVerification } from '@msg91comm/react-native-sendotp';
 import { FeatureApis } from '../apis/featureApis';
 import RegistrationModal from './RegistrationModal';
 import type { UserRegistrationData } from './RegistrationModal';
