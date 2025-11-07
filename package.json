@@ -173,7 +173,7 @@
   "dependencies": {
     "@invertase/react-native-apple-authentication": "^2.4.1",
     "@msg91comm/react-native-sendotp": "^1.0.0",
-    "@mysdk123/react-native-36blocks-proxy": "^1.0.1",
+
     "@react-native-async-storage/async-storage": "^2.1.2",
     "@react-native-google-signin/google-signin": "^13.2.0",
     "axios": "^1.8.4"
